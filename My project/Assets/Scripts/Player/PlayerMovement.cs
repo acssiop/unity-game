@@ -6,47 +6,73 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
 
     [Header("边界设置（从 PlayAreaBounds 获取）")]
-    public PlayAreaBounds areaBounds;   // 拖拽挂有 PlayAreaBounds 的地面物体到这里
+    public PlayAreaBounds areaBounds;
 
-    [Header("旋转设置")]
+    [Header("旋转速度")]
     public float rotationSpeed = 10f;
 
-    [Header("初始位置")]                       // 新增
-    public Vector3 startPosition = new Vector3(0, 0.5f, 0);   // 新增：可在 Inspector 中修改
+    [Header("初始位置")]
+    public Vector3 startPosition = new Vector3(0, 0.5f, 0);
+
+    private Rigidbody rb;
+    private Vector3 moveDirection;
 
     void Start()
     {
+        // 获取或自动添加刚体
+        rb = GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = gameObject.AddComponent<Rigidbody>();
+        }
+
+        // 关键：冻结旋转，防止物理碰撞导致倾斜或旋转
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        // 禁用重力（如果需要地面行走，可保留并改用其它重力处理）
+        rb.useGravity = false;
+
+        // 寻找场景中的边界脚本
         if (areaBounds == null)
             areaBounds = FindObjectOfType<PlayAreaBounds>();
 
-        // 使用 Inspector 中设置的初始位置
+        // 设置初始位置
         transform.position = startPosition;
     }
 
     void Update()
     {
+        // 只在 Update 中收集输入
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        moveDirection = new Vector3(horizontal, 0f, vertical).normalized;
+    }
+
+    void FixedUpdate()
+    {
         if (areaBounds == null)
             return;
 
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-
-        Vector3 moveDirection = new Vector3(horizontal, 0f, vertical).normalized;
-        Vector3 movement = moveDirection * moveSpeed * Time.deltaTime;
-        Vector3 newPosition = transform.position + movement;
-
-        // 边界限制（使用 PlayAreaBounds 提供的范围）
-        newPosition.x = Mathf.Clamp(newPosition.x, areaBounds.MinX, areaBounds.MaxX);
-        newPosition.z = Mathf.Clamp(newPosition.z, areaBounds.MinZ, areaBounds.MaxZ);
-        newPosition.y = startPosition.y;   // 改为保持初始高度，而非写死 0
-
-        transform.position = newPosition;
+        // 移动：直接设置速度（更干净、即时）
+        Vector3 targetVelocity = moveDirection * moveSpeed;
+        rb.velocity = new Vector3(targetVelocity.x, rb.velocity.y, targetVelocity.z);
 
         // 旋转：面向移动方向
         if (moveDirection != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime));
         }
+        else
+        {
+            // 停止输入时立刻消除水平速度，避免惯性滑动
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+        }
+
+        // 边界限制（通过 MovePosition 保持位置约束）
+        Vector3 clampedPos = rb.position;
+        clampedPos.x = Mathf.Clamp(clampedPos.x, areaBounds.MinX, areaBounds.MaxX);
+        clampedPos.z = Mathf.Clamp(clampedPos.z, areaBounds.MinZ, areaBounds.MaxZ);
+        clampedPos.y = startPosition.y; // 保持高度恒定
+        rb.MovePosition(clampedPos);
     }
 }
