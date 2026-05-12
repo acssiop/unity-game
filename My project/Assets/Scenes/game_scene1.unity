@@ -377,13 +377,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 709448915}
   localOffset: {x: 1.5, y: 0.8, z: 0}
-  followSmoothTime: 0.15
+  followSmoothTime: 0.075
   detectRange: 10
   enemyTag: Enemy
+  disengageRangeMultiplier: 1.5
   bulletPrefab: {fileID: 55552251}
   firePoint: {fileID: 658664270}
   fireInterval: 3
   damage: 25
+  rotationSpeed: 500
 --- !u!1 &709448911
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,8 +501,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 1217233316912423620, guid: 4b87ab1ca48eb7843a1501fd1bd8e241, type: 3}
   maxWeapons: 6
-  offsetPresets:
-  - {x: 0, y: 0, z: 0}
+  orbitRadius: 1.5
+  weaponHeight: 0.8
+  startAngle: 0
+  initialWeaponCount: 3
 --- !u!1 &902264163
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,15 +1017,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4652380516322348311, guid: 15766a8d2121c11479beb2ebc5c21515, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.05204332
+      value: -0.42
       objectReference: {fileID: 0}
     - target: {fileID: 4652380516322348311, guid: 15766a8d2121c11479beb2ebc5c21515, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.36
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 4652380516322348311, guid: 15766a8d2121c11479beb2ebc5c21515, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0071689487
+      value: -0.29
       objectReference: {fileID: 0}
     - target: {fileID: 4652380516322348311, guid: 15766a8d2121c11479beb2ebc5c21515, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1085,11 +1089,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6190716172220332709, guid: 4b87ab1ca48eb7843a1501fd1bd8e241, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.37
       objectReference: {fileID: 0}
     - target: {fileID: 6190716172220332709, guid: 4b87ab1ca48eb7843a1501fd1bd8e241, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.55
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 6190716172220332709, guid: 4b87ab1ca48eb7843a1501fd1bd8e241, type: 3}
       propertyPath: m_LocalPosition.z
