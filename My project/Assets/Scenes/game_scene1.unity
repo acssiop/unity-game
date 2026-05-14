@@ -230,61 +230,6 @@ MonoBehaviour:
   target: {fileID: 709448915}
   areaBounds: {fileID: 961791661}
   heightAboveGround: 20
---- !u!1 &666295490
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 666295492}
-  - component: {fileID: 666295491}
-  m_Layer: 0
-  m_Name: WeaponPoolManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &666295491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666295490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 243990026b7271042b68f8afcd8f0667, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entries:
-  - config: {fileID: 11400000, guid: e4e50986df7a79442ae5e78daf0eaa93, type: 2}
-    prewarmCount: 3
-  - config: {fileID: 11400000, guid: 9efb4748a96402a41b5c0fdc6bf3116c, type: 2}
-    prewarmCount: 3
-  - config: {fileID: 11400000, guid: 52cf3913886ee6e45bdeb54e06f7c205, type: 2}
-    prewarmCount: 3
-  - config: {fileID: 11400000, guid: 41b694d347046ed49a290f3abbd55965, type: 2}
-    prewarmCount: 3
-  - config: {fileID: 11400000, guid: b14b645a1416f374bb9ef36645677cd5, type: 2}
-    prewarmCount: 3
---- !u!4 &666295492
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666295490}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9496399, y: 1.7180041, z: 4.209008}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &697379258
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +336,6 @@ GameObject:
   - component: {fileID: 709448914}
   - component: {fileID: 709448913}
   - component: {fileID: 709448912}
-  - component: {fileID: 709448916}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -480,28 +424,6 @@ Transform:
   - {fileID: 1162905940}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &709448916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709448911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf5cfd36d66b1a140bfb46ccda905b01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponConfigs:
-  - {fileID: 11400000, guid: e4e50986df7a79442ae5e78daf0eaa93, type: 2}
-  - {fileID: 11400000, guid: 9efb4748a96402a41b5c0fdc6bf3116c, type: 2}
-  - {fileID: 11400000, guid: 52cf3913886ee6e45bdeb54e06f7c205, type: 2}
-  - {fileID: 11400000, guid: 41b694d347046ed49a290f3abbd55965, type: 2}
-  - {fileID: 11400000, guid: b14b645a1416f374bb9ef36645677cd5, type: 2}
-  circleRadius: 2
-  spawnOffset: {x: 0, y: 0.5, z: 0}
-  moveDuration: 0.3
-  maxWeapons: 6
 --- !u!1 &961791656
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,4 +763,3 @@ SceneRoots:
   - {fileID: 697379260}
   - {fileID: 961791660}
   - {fileID: 709448915}
-  - {fileID: 666295492}
