@@ -18,6 +18,7 @@ public class WeaponPool : MonoBehaviour
 
     void Awake()
     {
+
         // 单例初始化
         if (Instance != null && Instance != this)
         {
@@ -40,14 +41,47 @@ public class WeaponPool : MonoBehaviour
             }
             poolDict[entry.config] = queue;
         }
+        foreach (var entry in entries)
+        {
+            // 如果 config 无效，直接跳过该条目
+            if (entry.config == null)
+            {
+                Debug.LogWarning("PoolEntry 的 config 为空，已跳过", this);
+                continue;
+            }
+
+            var queue = new Queue<Weapon>();
+            for (int i = 0; i < entry.prewarmCount; i++)
+            {
+                var weapon = CreateNew(entry.config);
+                if (weapon == null)  // CreateNew 可能因为 prefab 为空等原因返回 null
+                {
+                    Debug.LogError($"无法预创建武器 '{entry.config.name}'，请检查 prefab", this);
+                    break;  // 跳出内层循环，该条目的预创建提前结束
+                }
+                weapon.gameObject.SetActive(false);
+                queue.Enqueue(weapon);
+            }
+            poolDict[entry.config] = queue;
+        }
     }
 
     Weapon CreateNew(WeaponConfig config)
     {
+        if (config == null)
+        {
+            Debug.LogError("CreateNew 收到 null WeaponConfig", this);
+            return null;
+        }
+        if (config.weaponPrefab == null)
+        {
+            Debug.LogError($"WeaponConfig '{config.name}' 的 weaponPrefab 未赋值", this);
+            return null;
+        }
+
         var go = Instantiate(config.weaponPrefab);
         var weapon = go.GetComponent<Weapon>();
         weapon.config = config;
-        // 绑定回收回调
         weapon.onReturnToPool = ReturnWeapon;
         return weapon;
     }
