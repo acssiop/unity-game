@@ -45,6 +45,8 @@ public class Enemy_Spawner : MonoBehaviour
     private float nextSpawnTime;
     private List<GameObject> activeEnemies = new List<GameObject>();
 
+    private bool isGameOver = false;
+
     private Dictionary<GameObject, Queue<GameObject>> pool =
         new Dictionary<GameObject, Queue<GameObject>>();
 
@@ -62,8 +64,7 @@ public class Enemy_Spawner : MonoBehaviour
 
     private void Update()
     {
-        if (GameOverManager.Instance != null && GameOverManager.IsGameOver)
-            return;
+        if (isGameOver) return;
         if (currentState != WaveState.Fighting) return;
 
         waveTimer -= Time.deltaTime;
@@ -152,6 +153,7 @@ public class Enemy_Spawner : MonoBehaviour
 
     private void EndWave()
     {
+        if (isGameOver) return;
         while (activeEnemies.Count > 0)
         {
             GameObject enemy = activeEnemies[0];
@@ -246,22 +248,23 @@ public class Enemy_Spawner : MonoBehaviour
     /// </summary>
     public void ClearAllEnemies()
     {
-        // 复制一份列表，避免因敌人 OnDisable 回调导致遍历异常
-        var snapshot = activeEnemies.ToArray();
+        // 标记游戏结束（阻止以后的所有行为）
+        isGameOver = true;
+
+        // 清空场上所有敌人
+        var snapshot = new List<GameObject>(activeEnemies);
         foreach (var enemy in snapshot)
         {
             if (enemy != null)
-                enemy.SetActive(false);   // 会自动触发 Enemy.OnDisable -> 注销、回池
+                enemy.SetActive(false);   // 通过 OnDisable 自动回池、注销
         }
-        activeEnemies.Clear();           // 确保列表为空
+        activeEnemies.Clear();
 
-        // 关闭商店面板（如果开着）
+        // 关闭可能已经打开的商店面板
         if (shopPanel != null) shopPanel.SetActive(false);
-        // 恢复正常时间流速（防止死亡前的时间缩放残留）
-        Time.timeScale = 1f;
 
-        // 可选：让生成器进入一个“已结束”状态，避免再次启动
-        currentState = WaveState.Fighting; // 或者随便什么，因为 Update 开头已经返回了
+        // 恢复正常时间流速
+        Time.timeScale = 1f;
     }
 
     private Vector3 GetRandomEdgePosition()

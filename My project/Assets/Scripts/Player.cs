@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
         Debug.Log("玩家死亡！");
         Enemy_Spawner spawner = FindObjectOfType<Enemy_Spawner>();
         // 显示死亡弹窗（GameOverManager 需提前置于场景中独立 Canvas 上）
+        if (spawner != null)
+            spawner.ClearAllEnemies();
         if (GameOverManager.Instance != null)
             GameOverManager.Instance.ShowDeathPanel();
         // 玩家消失（所有组件自动停用）
