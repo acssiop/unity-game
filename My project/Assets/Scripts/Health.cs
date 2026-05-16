@@ -47,6 +47,14 @@ public class Health : MonoBehaviour
 
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        //OnHealthChanged?.Invoke(currentHealth);
+    }
+
+    public void IncreaseMaxHealth(float amount)
+    {
+        maxHealth += amount;
+        currentHealth += amount;   // 提升上限同时恢复相同数量血量
+                                   // 如果有血量变化事件，触发更新
         OnHealthChanged?.Invoke(currentHealth);
     }
 

@@ -49,9 +49,9 @@ MonoBehaviour:
   damage: 10
   moveSpeed: 3
   rotateSpeed: 8
-  startMoveDelay: 0.5
+  startMoveDelay: 1
   attackRange: 2
-  attackInterval: 1
+  attackInterval: 2
 --- !u!114 &-5647116360525700803
 MonoBehaviour:
   m_ObjectHideFlags: 0

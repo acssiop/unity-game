@@ -154,6 +154,13 @@ public class Enemy_Spawner : MonoBehaviour
     private void EndWave()
     {
         if (isGameOver) return;
+
+        // --- 新增：收集所有未拾取的金币 ---
+        if (CoinManager.Instance != null)
+            CoinManager.Instance.CollectAllCoins();
+        // --- 新增结束 ---
+
+        // 原有清空敌人逻辑...
         while (activeEnemies.Count > 0)
         {
             GameObject enemy = activeEnemies[0];
@@ -163,9 +170,13 @@ public class Enemy_Spawner : MonoBehaviour
         }
 
         Time.timeScale = 0f;
-        currentState = WaveState.Shop;
-        if (shopPanel != null) shopPanel.SetActive(true);
 
+        if (shopPanel != null && !shopPanel.activeSelf)
+        {
+            shopPanel.SetActive(true);
+        }
+
+        currentState = WaveState.Shop;
         Debug.Log($"第 {currentWave} 波结束，进入商店");
     }
 

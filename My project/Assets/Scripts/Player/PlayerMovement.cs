@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private Vector3 moveDirection;
 
+
+    private PlayerStats playerStats;
     void Start()
     {
         // 获取或自动添加刚体
@@ -37,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
         // 设置初始位置
         transform.position = startPosition;
+        playerStats = GetComponent<PlayerStats>();
     }
 
     void Update()

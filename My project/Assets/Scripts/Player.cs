@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     {
         if (IsDead) return;
         IsDead = true;
+        if (CoinManager.Instance != null)
+            CoinManager.Instance.CollectAllCoins();
         Debug.Log("玩家死亡！");
         Enemy_Spawner spawner = FindObjectOfType<Enemy_Spawner>();
         // 显示死亡弹窗（GameOverManager 需提前置于场景中独立 Canvas 上）
