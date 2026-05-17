@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ca4a795d159224b9479504f06bf0aa, type: 3}
   m_Name: "\u653B\u51FB\u529B"
   m_EditorClassIdentifier: 
-  upgradeName: "\u653B\u51FB\u529B"
-  description: "\u653B\u51FB\u529B +10%"
+  upgradeName: "\u653B\u51FB\u529B +20%"
+  description: "\u6240\u6709\u6B66\u5668\u4F24\u5BB3\u63D0\u9AD8 20%"
   icon: {fileID: 0}
   type: 0
-  baseCost: 50
+  effectValuePerLevel: 0.1
+  weaponData: {fileID: 0}
+  baseCost: 0
+  costMultiplier: 1.5
+  maxLevel: 10

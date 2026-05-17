@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15ca4a795d159224b9479504f06bf0aa, type: 3}
-  m_Name: "\u653B\u51FB\u901F\u5EA6"
+  m_Name: "\u66B4\u51FB\u7387"
   m_EditorClassIdentifier: 
-  upgradeName: "\u653B\u51FB\u901F\u5EA6 +15%"
-  description: "\u653B\u51FB\u95F4\u9694\u7F29\u77ED 15%"
+  upgradeName: "\u66B4\u51FB\u7387 +5%"
+  description: "\u83B7\u5F97 5% \u66B4\u51FB\u51E0\u7387\t"
   icon: {fileID: 0}
-  type: 1
+  type: 5
   effectValuePerLevel: 0.1
   weaponData: {fileID: 0}
   baseCost: 0

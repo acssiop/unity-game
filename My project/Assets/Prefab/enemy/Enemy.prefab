@@ -52,6 +52,8 @@ MonoBehaviour:
   startMoveDelay: 1
   attackRange: 2
   attackInterval: 2
+  attackWindupTime: 0.2
+  warningMarkPrefab: {fileID: 0}
 --- !u!114 &-5647116360525700803
 MonoBehaviour:
   m_ObjectHideFlags: 0

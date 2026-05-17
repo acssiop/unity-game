@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15ca4a795d159224b9479504f06bf0aa, type: 3}
-  m_Name: "\u653B\u51FB\u901F\u5EA6"
+  m_Name: "\u6700\u5927\u751F\u547D 1"
   m_EditorClassIdentifier: 
-  upgradeName: "\u653B\u51FB\u901F\u5EA6 +15%"
-  description: "\u653B\u51FB\u95F4\u9694\u7F29\u77ED 15%"
+  upgradeName: "\u6700\u5927\u751F\u547D +30%"
+  description: "\u751F\u547D\u4E0A\u9650\u63D0\u9AD8 30% (\u589E\u52A030\u70B9)"
   icon: {fileID: 0}
-  type: 1
+  type: 3
   effectValuePerLevel: 0.1
   weaponData: {fileID: 0}
-  baseCost: 0
+  baseCost: 10
   costMultiplier: 1.5
   maxLevel: 10

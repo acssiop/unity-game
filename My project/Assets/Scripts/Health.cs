@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 public class Health : MonoBehaviour
 {
@@ -27,12 +28,24 @@ public class Health : MonoBehaviour
     // 受到伤害
     public void TakeDamage(float damage)
     {
+        Debug.Log($"[Health] {gameObject.name} 收到伤害 {damage}，当前血量 {currentHealth}");
         if (IsDead) return;
 
-        currentHealth -= damage;
+        PlayerStats stats = GetComponent<PlayerStats>();
+        if (stats != null && stats.dodgeChance > 0f)
+        {
+            if (Random.value < stats.dodgeChance)
+            {
+                Debug.Log("[Health] 闪避成功，伤害无效");
+                return;
+            }
+        }
 
-        Debug.Log($"{gameObject.name} 受到 {damage} 点伤害，剩余血量：{currentHealth}");
+        currentHealth -= damage;
+        Debug.Log($"[Health] 扣血后 {gameObject.name} 剩余血量: {currentHealth}");
+
         OnHealthChanged?.Invoke(currentHealth);
+
         if (currentHealth <= 0)
         {
             currentHealth = 0;

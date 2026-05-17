@@ -5,11 +5,12 @@ public class ProjectilePool : MonoBehaviour
 {
     public Projectile projectilePrefab;
     public int initialSize = 30;
-
+    public static ProjectilePool Instance { get; private set; }
     private readonly Queue<Projectile> pool = new Queue<Projectile>();
 
     private void Awake()
     {
+        Instance = this; // 如果有多个请处理
         for (int i = 0; i < initialSize; i++)
             CreateNewProjectile();
     }
@@ -32,7 +33,6 @@ public class ProjectilePool : MonoBehaviour
         proj.Target = null;
         proj.Damage = 0f;
         proj.Speed = 0f;
-        proj.MaxTravelDistance = 0f;
         proj.gameObject.SetActive(true);
         return proj;
     }

@@ -187,6 +187,12 @@ public class Enemy : MonoBehaviour
             }
         }
 
+        // 掉落经验球（固定1个，价值1）
+        if (ExperienceManager.Instance != null)
+        {
+            ExperienceManager.Instance.SpawnExperienceBall(transform.position, 1);
+        }
+
         if (spawner != null)
         {
             spawner.RemoveEnemy(gameObject);
